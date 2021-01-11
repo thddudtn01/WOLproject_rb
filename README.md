@@ -7,4 +7,4 @@
 ## Dependecy
 - python: 
 - selenium: 
-- firefox driver:
+- gecko driver: 0.23.0-arm7hf
