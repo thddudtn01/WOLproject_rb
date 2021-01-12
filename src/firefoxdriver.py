@@ -46,5 +46,5 @@ while 1:
             driver.find_element_by_xpath('/html/body/form/table/tbody/tr[2]/td[4]/span/input').click()
             driver.find_element_by_xpath('/html/body/form/table/tbody/tr[1]/td[4]/span/span').click()
             driver.switch_to.alert.accept()
-    time.sleep(2.0)
+    time.sleep(10.0)
 driver.quit()
