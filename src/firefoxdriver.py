@@ -1,6 +1,10 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
+import requests
+import json
+
+URL = "http://ssl305.herokuapp.com/"
 
 options = webdriver.firefox.options.Options()
 options.add_argument("--headless")
@@ -34,12 +38,13 @@ driver.switch_to.default_content()
 driver.switch_to.frame('main_body')
 driver.switch_to.frame('main')
 driver.switch_to.frame('wollist_iframe')
-for i in range(0,30):
-
-    time.sleep(0.5)
-    driver.find_element_by_xpath('/html/body/form/table/tbody/tr[2]/td[4]/span/input').click()
-
-    driver.find_element_by_xpath('/html/body/form/table/tbody/tr[1]/td[4]/span/span').click()
-    driver.switch_to.alert.accept()
-    time.sleep(5.0)
+time.sleep(3.0)
+while 1:
+    resp = requests.get(URL)
+    if resp.status_code:
+        if json.loads(resp.text)["return"] == 1:
+            driver.find_element_by_xpath('/html/body/form/table/tbody/tr[2]/td[4]/span/input').click()
+            driver.find_element_by_xpath('/html/body/form/table/tbody/tr[1]/td[4]/span/span').click()
+            driver.switch_to.alert.accept()
+    time.sleep(2.0)
 driver.quit()
